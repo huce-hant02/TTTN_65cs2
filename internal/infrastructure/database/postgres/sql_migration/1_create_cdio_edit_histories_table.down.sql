@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `cdio_edit_histories`;
