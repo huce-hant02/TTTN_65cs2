@@ -9,7 +9,7 @@ create table cdio_edit_histories
     active      boolean,
     modifier_id bigint
         constraint fk_cdio_edit_histories_modifier
-            references employees,
+            references users,
     note        text,
     created_at  timestamp with time zone,
     deleted_at  timestamp with time zone,

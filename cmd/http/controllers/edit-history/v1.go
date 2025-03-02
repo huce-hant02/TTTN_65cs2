@@ -13,6 +13,10 @@ type ControllerV1 struct {
 	getInfoUseCase edit_history.GetInfoInputUseCase
 }
 
+func NewEditHistoryControllerV1(getInfoUseCase edit_history.GetInfoInputUseCase) *ControllerV1 {
+	return &ControllerV1{getInfoUseCase: getInfoUseCase}
+}
+
 func (u *ControllerV1) GetInfo(ctx *gin.Context) {
 	modelIdStr := ctx.Query("modelId")
 	if modelIdStr == "" {
@@ -37,8 +41,4 @@ func (u *ControllerV1) GetInfo(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, results)
-}
-
-func NewEditHistoryControllerV1(getInfoUseCase edit_history.GetInfoInputUseCase) *ControllerV1 {
-	return &ControllerV1{getInfoUseCase: getInfoUseCase}
 }

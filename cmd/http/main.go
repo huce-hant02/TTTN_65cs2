@@ -68,19 +68,19 @@ func (a *App) registerRoute() {
 	a.router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	user.RegisterRoutesV1(a.router, a.userControllerV1)
-	edit_history.RegisterRoutesV1(a.router, a.editHistoryControllerV1)
 	user.RegisterRoutesV2(a.router, a.userControllerV2)
+	edit_history.RegisterRoutesV1(a.router, a.editHistoryControllerV1)
 }
 
 func inject(
 	app *App,
 	userControllerV1 *user.ControllerV1,
-	editHistoryControllerV1 *edit_history.Controller,
 	userControllerV2 *user.ControllerV2,
+	editHistoryControllerV1 *edit_history.ControllerV1,
 ) error {
 	app.userControllerV1 = userControllerV1
-	editHistoryControllerV1 = editHistoryControllerV1
 	app.userControllerV2 = userControllerV2
+	app.editHistoryControllerV1 = editHistoryControllerV1
 	return nil
 }
 

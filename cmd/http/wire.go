@@ -9,6 +9,7 @@ import (
 	"github.com/google/wire"
 	"mono-base/cmd/http/controllers"
 	"mono-base/internal/infrastructure/database"
+	"mono-base/internal/services"
 	"mono-base/internal/usecases"
 )
 

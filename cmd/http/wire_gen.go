@@ -7,9 +7,11 @@
 package main
 
 import (
+	edit_history2 "mono-base/cmd/http/controllers/edit-history"
 	user3 "mono-base/cmd/http/controllers/user"
 	"mono-base/internal/infrastructure/database/postgres"
 	"mono-base/internal/services/user"
+	"mono-base/internal/usecases/edit-history"
 	user2 "mono-base/internal/usecases/user"
 )
 
@@ -26,6 +28,9 @@ func wireApp(app *App) error {
 	loginUseCase := user2.NewLoginUseCase(authService, userRepository)
 	controllerV1 := user3.NewUserControllerV1(loginUseCase)
 	controllerV2 := user3.NewUserControllerV2(loginUseCase)
-	error2 := inject(app, controllerV1, controllerV2)
+	editHistoryRepository := postgres.NewEditHistoryRepository(db)
+	getInfoInputUseCase := edit_history.NewGetInfoInputUseCase(editHistoryRepository, userRepository)
+	edit_historyControllerV1 := edit_history2.NewEditHistoryControllerV1(getInfoInputUseCase)
+	error2 := inject(app, controllerV1, controllerV2, edit_historyControllerV1)
 	return error2
 }
