@@ -9,5 +9,5 @@ type Controller interface {
 // RegisterRoutesV1 register routes for version 1
 func RegisterRoutesV1(router *gin.Engine, controller Controller) {
 	v1 := router.Group("/v1")
-	v1.POST("/get-info", controller.GetInfo)
+	v1.GET("/get-info", controller.GetInfo)
 }
